@@ -60,6 +60,12 @@ public class FrameFileSelector extends JFrame {
 		panel_1.add(selectButton);
 		
 		editButton = new JButton("Edit Prison");
+		editButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Start.startEditor(Util.getPrisonFile(getList().getSelectedValue()));
+				dispose();
+			}
+		});
 		editButton.setFont(new Font("Dialog", Font.PLAIN, 12));
 		panel_1.add(editButton);
 		
