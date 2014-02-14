@@ -2,16 +2,14 @@ package com.sinius15.pame;
 
 import java.awt.BorderLayout;
 
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-import javax.swing.ListModel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.event.ListDataListener;
+import java.awt.Font;
 
 public class FrameFileSelector extends JFrame {
 
@@ -23,7 +21,7 @@ public class FrameFileSelector extends JFrame {
 		
 		setTitle("Select a prison");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 370, 300);
+		setBounds(100, 100, 400, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -34,18 +32,21 @@ public class FrameFileSelector extends JFrame {
 		
 		textField = new JTextField();
 		panel_1.add(textField);
-		textField.setColumns(20);
+		textField.setColumns(15);
 		
 		JButton btnSelectFile = new JButton("select file");
+		btnSelectFile.setFont(new Font("Dialog", Font.PLAIN, 12));
 		panel_1.add(btnSelectFile);
 		
 		JButton btnEditFile = new JButton("Edit Prison");
+		btnEditFile.setFont(new Font("Dialog", Font.PLAIN, 12));
 		panel_1.add(btnEditFile);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		contentPane.add(scrollPane, BorderLayout.CENTER);
 		
-		JList<String> list = new JList<String>(files);
+		JList<String> list = new JList<String>();
+		list.setFont(new Font("Dialog", Font.PLAIN, 12));
 		list.setListData(files);
 		scrollPane.setViewportView(list);
 		setVisible(true);
