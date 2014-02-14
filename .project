@@ -14,4 +14,11 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>pa map viewer api</name>
+			<type>2</type>
+			<locationURI>WORKSPACE_LOC/PA%20Map%20Viewer%20API/src</locationURI>
+		</link>
+	</linkedResources>
 </projectDescription>
