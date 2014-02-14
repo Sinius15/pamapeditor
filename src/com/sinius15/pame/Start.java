@@ -10,13 +10,13 @@ public class Start {
 	}
 	
 	public static String[] getAllPrisons(){
-		File[] f = new File(System.getenv("APPDATA")+"\\Local\\Introversion\\Prison Architect\\saves").listFiles();
+		File[] f = new File(new File(System.getenv("APPDATA")).getParent() + "\\Local\\Introversion\\Prison Architect\\saves\\").listFiles();
 		ArrayList<String> out = new ArrayList<>();
 		for(File g : f){
 			if(g.isFile() && g.getName().endsWith(".prison"))
 				out.add(g.getName());
 		}
-		return (String[]) out.toArray();
+		return out.toArray(new String[out.size()]);
 	}
 	
 	public static File getPrisonFile(String prisonName){

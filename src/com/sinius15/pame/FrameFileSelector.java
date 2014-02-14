@@ -2,13 +2,16 @@ package com.sinius15.pame;
 
 import java.awt.BorderLayout;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.ListModel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListDataListener;
 
 public class FrameFileSelector extends JFrame {
 
@@ -16,7 +19,8 @@ public class FrameFileSelector extends JFrame {
 	private JPanel contentPane;
 	private JTextField textField;
 
-	public FrameFileSelector(String[] files) {
+	public FrameFileSelector(final String[] files) {
+		
 		setTitle("Select a prison");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 370, 300);
@@ -41,9 +45,10 @@ public class FrameFileSelector extends JFrame {
 		JScrollPane scrollPane = new JScrollPane();
 		contentPane.add(scrollPane, BorderLayout.CENTER);
 		
-		JList<String> list = new JList<String>();
+		JList<String> list = new JList<String>(files);
 		list.setListData(files);
 		scrollPane.setViewportView(list);
+		setVisible(true);
 	}
 
 }
