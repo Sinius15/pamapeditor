@@ -1,6 +1,9 @@
 package com.sinius15.pame;
 
 import java.io.File;
+import java.io.IOException;
+
+import com.sinius15.pamapapi.PrisonLoader;
 
 public class Start {
 	
@@ -13,7 +16,11 @@ public class Start {
 		new FrameFileSelector(Util.getAllPrisonsOnDisk());
 	}
 	
-	public static void startEditor(File prison){
-		new FramePrisonEditor();
+	public static void startEditor(File prisonFile){
+		try {
+			new FramePrisonEditor(PrisonLoader.loadPrison(prisonFile));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

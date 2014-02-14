@@ -1,5 +1,7 @@
 package com.sinius15.pame;
 
+import java.awt.Dimension;
+
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -11,13 +13,14 @@ public class EntryPane extends JPanel {
 		setLayout(null);
 		
 		nameField = new JTextField(name);
-		nameField.setBounds(10, 0, 101, 20);
+		nameField.setBounds(3, 3, 150, 20);
 		add(nameField);
 		
 		valueField = new JTextField(value);
-		valueField.setBounds(111, 0, 246, 20);
+		valueField.setBounds(165, 3, 110, 20);
 		add(valueField);
-		valueField.setColumns(30);
+		
+		setPreferredSize(new Dimension(270, 23));
 	}
 
 }
