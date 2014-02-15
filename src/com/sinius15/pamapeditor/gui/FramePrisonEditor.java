@@ -35,7 +35,7 @@ public class FramePrisonEditor extends JFrame {
 	private JLabel lbl1;
 	private JSplitPane splitPane;
 	private JScrollPane levelScroller;
-	private JPanel levelHolder;
+	private DrawingPanel levelHolder;
 	private GuiHandler guiHandler;
 
 	public FramePrisonEditor(Prison prison) {
@@ -68,7 +68,7 @@ public class FramePrisonEditor extends JFrame {
 		levelScroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		splitPane.setLeftComponent(levelScroller);
 		
-		levelHolder = new JPanel();
+		levelHolder = new DrawingPanel();
 		levelScroller.setViewportView(levelHolder);
 		levelHolder.setLayout(null);
 		
