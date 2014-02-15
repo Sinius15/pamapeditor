@@ -3,9 +3,7 @@ package com.sinius15.pamapeditor.gui;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
-import java.awt.Rectangle;
 
-import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -13,16 +11,13 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTextField;
-import javax.swing.JToggleButton;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 
-import com.sinius15.pamapapi.DataBlock;
-import com.sinius15.pamapapi.Entry;
 import com.sinius15.pamapapi.Prison;
-import com.sinius15.pamapeditor.helpers.VisualEntry;
+import com.sinius15.pamapeditor.helpers.GuiHandler;
 
 public class FramePrisonEditor extends JFrame {
 
@@ -41,11 +36,7 @@ public class FramePrisonEditor extends JFrame {
 	private JSplitPane splitPane;
 	private JScrollPane levelScroller;
 	private JPanel levelHolder;
-	private JToggleButton tglbtnNewToggleButton;
-	private JToggleButton tglbtnNewToggleButton_1;
-	private JToggleButton tglbtnNewToggleButton_2;
-	private JToggleButton tglbtnNewToggleButton_3;
-	private final ButtonGroup buttonGroup = new ButtonGroup();
+	private GuiHandler guiHandler;
 
 	public FramePrisonEditor(Prison prison) {
 		try {
@@ -81,26 +72,6 @@ public class FramePrisonEditor extends JFrame {
 		levelScroller.setViewportView(levelHolder);
 		levelHolder.setLayout(null);
 		
-		tglbtnNewToggleButton = new JToggleButton("New toggle button");
-		tglbtnNewToggleButton.setBounds(0, 1, 121, 110);
-		buttonGroup.add(tglbtnNewToggleButton);
-		levelHolder.add(tglbtnNewToggleButton);
-		
-		tglbtnNewToggleButton_1 = new JToggleButton("New toggle button");
-		tglbtnNewToggleButton_1.setBounds(0, 111, 121, 110);
-		buttonGroup.add(tglbtnNewToggleButton_1);
-		levelHolder.add(tglbtnNewToggleButton_1);
-		
-		tglbtnNewToggleButton_2 = new JToggleButton("New toggle button");
-		tglbtnNewToggleButton_2.setBounds(0, 221, 121, 110);
-		buttonGroup.add(tglbtnNewToggleButton_2);
-		levelHolder.add(tglbtnNewToggleButton_2);
-		
-		tglbtnNewToggleButton_3 = new JToggleButton("New toggle button");
-		tglbtnNewToggleButton_3.setBounds(0, 331, 121, 110);
-		buttonGroup.add(tglbtnNewToggleButton_3);
-		levelHolder.add(tglbtnNewToggleButton_3);
-		
 		bottomContainer = new JPanel();
 		contentPane.add(bottomContainer, BorderLayout.SOUTH);
 		bottomContainer.setLayout(new GridLayout(0, 1, 0, 0));
@@ -129,20 +100,14 @@ public class FramePrisonEditor extends JFrame {
 		btnIgnoreChanges = new JButton("Ignore Changes and Refresh");
 		buttonContainer.add(btnIgnoreChanges);
 		
-		for(Entry e : prison.entrys){
-			entryHolder.add(new VisualEntry(e));
-			int height = (int) entryHolder.getPreferredSize().getHeight();
-            Rectangle rect = new Rectangle(0,height,10,10);
-            entryHolder.scrollRectToVisible(rect);
-		}
-		for(DataBlock b : prison.dataBlocks){
-			
-		}
+		guiHandler = new GuiHandler(levelHolder, entryHolder, prison);
+		
 		revalidate();
 		setVisible(true);
 		
 		splitPane.setDividerLocation(0.5);
 	}
+	
 	public JScrollPane getEntryScroller() {
 		return entryScroller;
 	}

@@ -7,13 +7,13 @@ import javax.swing.JTextField;
 
 import com.sinius15.pamapapi.Entry;
 
-public class VisualEntry extends JPanel {
+public class EntryPane extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
 	private JTextField valueField, nameField;
 	private Entry originalEntry;
 	
-	public VisualEntry(Entry e) {
+	public EntryPane(Entry e) {
 		originalEntry = e;
 		setLayout(null);
 		
