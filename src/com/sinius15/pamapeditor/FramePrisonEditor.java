@@ -1,8 +1,9 @@
-package com.sinius15.pame;
+package com.sinius15.pamapeditor;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -28,6 +29,19 @@ public class FramePrisonEditor extends JFrame {
 	private static final long serialVersionUID = 7539789100657354803L;
 	private JPanel contentPane;
 	private JTextField prisonNameField;
+	private JPanel dataContainer;
+	private JScrollPane entryScroller;
+	private JPanel buttonContainer;
+	private JPanel propetyContainer;
+	private JButton btnSavePrison;
+	private JPanel entryHolder;
+	private JButton btnIgnoreChanges;
+	private JList<String> levelList;
+	private JPanel entryPane;
+	private JButton btnSavePrisonAs;
+	private JPanel bottomContainer;
+	private JLabel lbl1;
+	private JPanel levelPane;
 
 	public FramePrisonEditor(Prison prison) {
 		setTitle("A Prison Editor!");
@@ -38,11 +52,11 @@ public class FramePrisonEditor extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
-		JPanel dataContainer = new JPanel();
+		dataContainer = new JPanel();
 		contentPane.add(dataContainer);
 		dataContainer.setLayout(new GridLayout(0, 2, 0, 0));
 		
-		JPanel levelPane = new JPanel();
+		levelPane = new JPanel();
 		dataContainer.add(levelPane);
 		levelPane.setAlignmentY(Component.TOP_ALIGNMENT);
 		levelPane.setPreferredSize(new Dimension(300, 386));
@@ -50,10 +64,10 @@ public class FramePrisonEditor extends JFrame {
 		levelPane.setAlignmentX(Component.RIGHT_ALIGNMENT);
 		levelPane.setLayout(new BorderLayout(0, 0));
 		
-		JList<String> levelList = new JList<String>();
+		levelList = new JList<String>();
 		levelPane.add(levelList, BorderLayout.CENTER);
 		
-		JPanel entryPane = new JPanel();
+		entryPane = new JPanel();
 		dataContainer.add(entryPane);
 		entryPane.setAlignmentY(Component.TOP_ALIGNMENT);
 		entryPane.setAlignmentX(1.0f);
@@ -61,41 +75,41 @@ public class FramePrisonEditor extends JFrame {
 		entryPane.setPreferredSize(new Dimension(315, 386));
 		entryPane.setLayout(new BorderLayout(0, 0));
 		
-		JScrollPane entryScroller = new JScrollPane();
+		entryScroller = new JScrollPane();
 		entryPane.add(entryScroller, BorderLayout.CENTER);
 		entryScroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		
-		JPanel entryHolder = new JPanel();
+		entryHolder = new JPanel();
 		entryScroller.setViewportView(entryHolder);
 		entryHolder.setLayout(new GridLayout(0,1));
 		
-		JPanel bottomContainer = new JPanel();
+		bottomContainer = new JPanel();
 		contentPane.add(bottomContainer, BorderLayout.SOUTH);
 		bottomContainer.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		JPanel propetyContainer = new JPanel();
+		propetyContainer = new JPanel();
 		bottomContainer.add(propetyContainer);
 		propetyContainer.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		JLabel lbl1 = new JLabel("Prison Name");
+		lbl1 = new JLabel("Prison Name");
 		propetyContainer.add(lbl1);
 		
 		prisonNameField = new JTextField();
 		propetyContainer.add(prisonNameField);
 		prisonNameField.setColumns(10);
 		
-		JPanel buttonContainer = new JPanel();
+		buttonContainer = new JPanel();
 		bottomContainer.add(buttonContainer);
 		buttonContainer.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		JButton btnSavePrison = new JButton("Save Prison");
+		btnSavePrison = new JButton("Save Prison");
 		buttonContainer.add(btnSavePrison);
 		
-		JButton btnSavePrisonAs = new JButton("Save Prison As...");
+		btnSavePrisonAs = new JButton("Save Prison As...");
 		buttonContainer.add(btnSavePrisonAs);
 		
-		JButton btnIgnoreChangesAnd = new JButton("Ignore Changes and Refresh");
-		buttonContainer.add(btnIgnoreChangesAnd);
+		btnIgnoreChanges = new JButton("Ignore Changes and Refresh");
+		buttonContainer.add(btnIgnoreChanges);
 		
 		for(Entry e : prison.entrys){
 			entryHolder.add(new EntryPane(e.name, e.value));
@@ -105,5 +119,47 @@ public class FramePrisonEditor extends JFrame {
 		}
 		
 		setVisible(true);
+	}
+	public JPanel getDataContainer() {
+		return dataContainer;
+	}
+	public JScrollPane getEntryScroller() {
+		return entryScroller;
+	}
+	public JPanel getButtonContainer() {
+		return buttonContainer;
+	}
+	public JPanel getPropetyContainer() {
+		return propetyContainer;
+	}
+	public JButton getBtnSavePrison() {
+		return btnSavePrison;
+	}
+	public JPanel getEntryHolder() {
+		return entryHolder;
+	}
+	public JButton getBtnIgnoreChanges() {
+		return btnIgnoreChanges;
+	}
+	public JTextField getPrisonNameField() {
+		return prisonNameField;
+	}
+	public JList<String> getLevelList() {
+		return levelList;
+	}
+	public JPanel getEntryPane() {
+		return entryPane;
+	}
+	public JButton getBtnSavePrisonAs() {
+		return btnSavePrisonAs;
+	}
+	public JPanel getBottomContainer() {
+		return bottomContainer;
+	}
+	public JLabel getLbl1() {
+		return lbl1;
+	}
+	public JPanel getLevelPane() {
+		return levelPane;
 	}
 }

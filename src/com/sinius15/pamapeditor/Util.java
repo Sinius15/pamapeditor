@@ -1,4 +1,4 @@
-package com.sinius15.pame;
+package com.sinius15.pamapeditor;
 
 import java.io.File;
 import java.util.ArrayList;
