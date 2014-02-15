@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 
 import com.sinius15.pamapapi.PrisonLoader;
+import com.sinius15.pamapeditor.gui.FrameFileSelector;
+import com.sinius15.pamapeditor.gui.FramePrisonEditor;
 
 public class Start {
 	

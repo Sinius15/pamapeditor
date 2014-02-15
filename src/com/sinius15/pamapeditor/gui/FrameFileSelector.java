@@ -1,4 +1,4 @@
-package com.sinius15.pamapeditor;
+package com.sinius15.pamapeditor.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
@@ -15,6 +15,9 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+
+import com.sinius15.pamapeditor.Start;
+import com.sinius15.pamapeditor.Util;
 
 public class FrameFileSelector extends JFrame {
 

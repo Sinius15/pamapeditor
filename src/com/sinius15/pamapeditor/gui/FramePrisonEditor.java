@@ -1,14 +1,15 @@
-package com.sinius15.pamapeditor;
+package com.sinius15.pamapeditor.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.Rectangle;
 
+import javax.swing.DefaultListCellRenderer;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -21,8 +22,10 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
+import com.sinius15.pamapapi.DataBlock;
 import com.sinius15.pamapapi.Entry;
 import com.sinius15.pamapapi.Prison;
+import com.sinius15.pamapeditor.helpers.VisualEntry;
 
 public class FramePrisonEditor extends JFrame {
 
@@ -36,12 +39,13 @@ public class FramePrisonEditor extends JFrame {
 	private JButton btnSavePrison;
 	private JPanel entryHolder;
 	private JButton btnIgnoreChanges;
-	private JList<String> levelList;
+	private JList<DataBlock> levelList;
 	private JPanel entryPane;
 	private JButton btnSavePrisonAs;
 	private JPanel bottomContainer;
 	private JLabel lbl1;
 	private JPanel levelPane;
+	private DefaultListModel<DataBlock> listModel = new DefaultListModel<>();
 
 	public FramePrisonEditor(Prison prison) {
 		setTitle("A Prison Editor!");
@@ -64,7 +68,18 @@ public class FramePrisonEditor extends JFrame {
 		levelPane.setAlignmentX(Component.RIGHT_ALIGNMENT);
 		levelPane.setLayout(new BorderLayout(0, 0));
 		
-		levelList = new JList<String>();
+		levelList = new JList<DataBlock>(listModel);
+		levelList.setCellRenderer(new DefaultListCellRenderer() {
+			private static final long serialVersionUID = 1L;
+			@Override
+			public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+				super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+				if(value instanceof DataBlock)
+					setText(((DataBlock) value).name);
+				return this;
+			}
+			
+		});
 		levelPane.add(levelList, BorderLayout.CENTER);
 		
 		entryPane = new JPanel();
@@ -112,12 +127,16 @@ public class FramePrisonEditor extends JFrame {
 		buttonContainer.add(btnIgnoreChanges);
 		
 		for(Entry e : prison.entrys){
-			entryHolder.add(new EntryPane(e.name, e.value));
+			entryHolder.add(new VisualEntry(e));
 			int height = (int) entryHolder.getPreferredSize().getHeight();
             Rectangle rect = new Rectangle(0,height,10,10);
             entryHolder.scrollRectToVisible(rect);
 		}
-		
+		for(DataBlock b : prison.dataBlocks){
+			//listModel.addElement(b);
+		}
+		listModel.addElement(new DataBlock("eyo"));
+		revalidate();
 		setVisible(true);
 	}
 	public JPanel getDataContainer() {
@@ -143,9 +162,6 @@ public class FramePrisonEditor extends JFrame {
 	}
 	public JTextField getPrisonNameField() {
 		return prisonNameField;
-	}
-	public JList<String> getLevelList() {
-		return levelList;
 	}
 	public JPanel getEntryPane() {
 		return entryPane;
