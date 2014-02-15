@@ -4,10 +4,10 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Rectangle;
-import java.awt.geom.Line2D;
-import java.awt.geom.Point2D;
-import java.awt.geom.Rectangle2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JPanel;
@@ -27,6 +27,7 @@ public class GuiHandler {
 	private ArrayList<Component> comps = new ArrayList<>();
 	private JToggleButton button;
 	private int maxVerticalButtons = 1;
+	private HashMap<Point, String> pointToDataBlock = new HashMap<>();
 	
 	public GuiHandler(DrawingPanel levelHolder, JPanel entryHolder, Prison prison){
 		this.levelPane = levelHolder;
@@ -62,8 +63,10 @@ public class GuiHandler {
 		
 		//adding comps
 		for(Component b : comps){
-			if(b instanceof JToggleButton)
+			if(b instanceof JToggleButton){
+				((JToggleButton) b).addActionListener(actionListener);
 				bGroup.add((JToggleButton) b);
+			}
 			levelPane.add(b);
 		}
 		
@@ -98,5 +101,12 @@ public class GuiHandler {
 		Rectangle rect = new Rectangle(0,height,10,10);
 		entryPane.scrollRectToVisible(rect);
 	}
+	
+	private ActionListener actionListener = new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			//e
+		}
+	};
 	
 }
