@@ -27,9 +27,10 @@ public class GuiHandler {
 	private ArrayList<Component> comps = new ArrayList<>();
 	private JToggleButton button;
 	private int maxVerticalButtons = 1;
-	private HashMap<Point, String> pointToDataBlock = new HashMap<>();
+	private HashMap<Point, String> pointToDataBlock = new HashMap<>(65536);
 	
 	public GuiHandler(DrawingPanel levelHolder, JPanel entryHolder, Prison prison){
+		
 		this.levelPane = levelHolder;
 		this.entryPane = entryHolder;
 		this.prison = prison;
@@ -38,6 +39,7 @@ public class GuiHandler {
 		button = new JToggleButton(prison.name);
 		int w = prison.name.length()*10+20;
 		button.setBounds(5, 5, w, 25);
+		pointToDataBlock.put(new Point(5, 5), "root");
 		comps.add(button);
 		//root to horizontal line
 		levelPane.addLine(new SLine(w/2, 10, w/2, 40));
@@ -47,6 +49,7 @@ public class GuiHandler {
 			button = new JToggleButton(block.name);
 			w = x*200+5;
 			button.setBounds(w, 60, 100, 20);
+			pointToDataBlock.put(new Point(w, 60), block.referencePath);
 			comps.add(button);
 			//btn to big horizontal line  (so it goes up)
 			levelPane.addLine(new SLine(w+50, 70, w+50, 40));
@@ -57,20 +60,20 @@ public class GuiHandler {
 		}
 		
 		levelPane.setPreferredSize(new Dimension(x*200+5, maxVerticalButtons*30+100));
-		
 		//horizontal line
 		levelPane.addLine(new SLine(5, 40, x*200-100, 40));
-		
 		//adding comps
 		for(Component b : comps){
 			if(b instanceof JToggleButton){
-				((JToggleButton) b).addActionListener(actionListener);
-				bGroup.add((JToggleButton) b);
+				JToggleButton but = ((JToggleButton) b);
+				but.addActionListener(actionListener);
+				bGroup.add(but);
 			}
 			levelPane.add(b);
 		}
 		
 		levelPane.repaint();
+		
 		updateEntrys(prison);
 	}
 	
@@ -83,7 +86,9 @@ public class GuiHandler {
 			
 			JToggleButton button = new JToggleButton(block.name);
 			button.setBounds(x+7, y+30+30*n, 100, 20);
+			pointToDataBlock.put(new Point(x+7, y+30+30*n), block.referencePath);
 			comps.add(button);
+			//pointToDataBlock.put(new Point(x+7, y+30+30*n), b);
 			n+= addSubBlocks(block, new Point(x+7, y+30+30*n))+1;
 		}
 		//vertical line through all the small horizontal lines if there is a subblock
@@ -94,18 +99,30 @@ public class GuiHandler {
 	}
 	
 	public void updateEntrys(DataBlock b){
-		entryPane.removeAll();
-		for(Entry e : b.entrys)
-			entryPane.add(new EntryPane(e));
-		int height = (int) entryPane.getPreferredSize().getHeight();
-		Rectangle rect = new Rectangle(0,height,10,10);
-		entryPane.scrollRectToVisible(rect);
+		synchronized (this) {
+			entryPane.removeAll();
+			for(Entry e : b.entrys)
+				entryPane.add(new EntryPane(e));
+			int height = (int) entryPane.getPreferredSize().getHeight();
+			Rectangle rect = new Rectangle(0,height,10,10);
+			entryPane.scrollRectToVisible(rect);
+			entryPane.revalidate();
+			entryPane.repaint();
+		}
+		
 	}
 	
 	private ActionListener actionListener = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			//e
+			if(e.getSource() instanceof JToggleButton){
+				JToggleButton but = (JToggleButton) e.getSource();
+				System.out.println(pointToDataBlock.get(new Point(but.getX(), but.getY())));
+				if(pointToDataBlock.get(new Point(but.getX(), but.getY())).equals("root"))
+					updateEntrys(prison);
+				else
+					updateEntrys(prison.getBlock(pointToDataBlock.get(new Point(but.getX(), but.getY()))));
+			}
 		}
 	};
 	
