@@ -12,8 +12,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 
 import com.sinius15.pamapapi.Prison;
@@ -37,11 +35,6 @@ public class FramePrisonEditor extends JFrame {
 	private DrawingPanel levelHolder;
 
 	public FramePrisonEditor(Prison prison) {
-		try {
-			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e1) {
-			e1.printStackTrace();
-		}
 		setTitle("A Prison Editor!");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 670, 578);
