@@ -1,4 +1,4 @@
-package com.sinius15.pamapeditor.helpers;
+package com.sinius15.pamapeditor.gui;
 
 import java.awt.Point;
 import java.awt.Rectangle;

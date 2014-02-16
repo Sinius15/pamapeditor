@@ -1,4 +1,4 @@
-package com.sinius15.pamapeditor.helpers;
+package com.sinius15.pamapeditor.gui;
 
 import java.awt.Dimension;
 
@@ -25,7 +25,7 @@ public class EntryPane extends JPanel {
 		valueField.setBounds(165, 3, 110, 20);
 		add(valueField);
 		
-		setPreferredSize(new Dimension(270, 23));
+		setPreferredSize(new Dimension(280, 23));
 	}
 	
 	public Entry getCurrentEntry(){

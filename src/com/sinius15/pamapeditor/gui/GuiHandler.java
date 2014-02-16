@@ -1,4 +1,4 @@
-package com.sinius15.pamapeditor.helpers;
+package com.sinius15.pamapeditor.gui;
 
 import java.awt.Component;
 import java.awt.Dimension;
@@ -16,7 +16,6 @@ import javax.swing.JToggleButton;
 import com.sinius15.pamapapi.DataBlock;
 import com.sinius15.pamapapi.Entry;
 import com.sinius15.pamapapi.Prison;
-import com.sinius15.pamapeditor.gui.DrawingPanel;
 
 public class GuiHandler {
 
@@ -117,11 +116,11 @@ public class GuiHandler {
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource() instanceof JToggleButton){
 				JToggleButton but = (JToggleButton) e.getSource();
-				System.out.println(pointToDataBlock.get(new Point(but.getX(), but.getY())));
-				if(pointToDataBlock.get(new Point(but.getX(), but.getY())).equals("root"))
+				String s = pointToDataBlock.get(new Point(but.getX(), but.getY()));
+				if(s.equals("root"))
 					updateEntrys(prison);
 				else
-					updateEntrys(prison.getBlock(pointToDataBlock.get(new Point(but.getX(), but.getY()))));
+					updateEntrys(prison.getBlock(s));
 			}
 		}
 	};

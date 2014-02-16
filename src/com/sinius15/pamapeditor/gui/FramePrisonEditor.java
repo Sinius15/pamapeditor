@@ -17,7 +17,6 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 
 import com.sinius15.pamapapi.Prison;
-import com.sinius15.pamapeditor.helpers.GuiHandler;
 
 public class FramePrisonEditor extends JFrame {
 
@@ -36,7 +35,6 @@ public class FramePrisonEditor extends JFrame {
 	private JSplitPane splitPane;
 	private JScrollPane levelScroller;
 	private DrawingPanel levelHolder;
-	private GuiHandler guiHandler;
 
 	public FramePrisonEditor(Prison prison) {
 		try {
@@ -61,7 +59,7 @@ public class FramePrisonEditor extends JFrame {
 		
 		entryHolder = new JPanel();
 		entryScroller.setViewportView(entryHolder);
-		entryHolder.setLayout(new GridLayout(0,1,0,0));
+		entryHolder.setLayout(new RowLayout(2, false));
 		
 		levelScroller = new JScrollPane();
 		levelScroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
@@ -100,7 +98,7 @@ public class FramePrisonEditor extends JFrame {
 		btnIgnoreChanges = new JButton("Ignore Changes and Refresh");
 		buttonContainer.add(btnIgnoreChanges);
 		
-		guiHandler = new GuiHandler(levelHolder, entryHolder, prison);
+		new GuiHandler(levelHolder, entryHolder, prison);
 		
 		revalidate();
 		setVisible(true);
