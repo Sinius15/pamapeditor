@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -65,7 +66,7 @@ public class FrameFileSelector extends JFrame {
 		editButton = new JButton("Edit Prison");
 		editButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Start.startEditor(Util.getPrisonFile(getList().getSelectedValue()));
+				Start.startEditor(new File(fileField.getText()));
 				dispose();
 			}
 		});
